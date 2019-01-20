@@ -3,13 +3,11 @@
 import "../stylesheets/app.css";
 
 // Import libraries we need.
-
 import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
 
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI({host:'localhost', port:'5001', protocol:'http'});
-
 
 // Import our contract artifacts and turn them into usable abstractions.
 import ecommerce_store_artifacts from '../../build/contracts/EcommerceStore.json'
@@ -24,8 +22,8 @@ window.App = {
   EcommerceStore.setProvider(web3.currentProvider);
 
   $('#how-to-buy').html("<ul>" +
-                            "<li>Click on details of the product on the homa page</li>" +
-                            "<li>Buy</li>" +
+                            "<li>Click on details of the product on the home page</li>" +
+                            "<li>Click 'Buy'.</li>" +
                             "<li>Verify and accept the charges on Metamask pop-up.</li>" +
                         "</ul>");
 
@@ -33,7 +31,7 @@ window.App = {
                           "<li>Go to List Item from the home page</li>" +
                           "<li>Fill the form</li>" +
                           "<li>Click on 'Add Product To Store'</li>" +
-                          "<li>Verify and Pay the Network and listing fees if any.</li>" +
+                          "<li>Verify and Pay the Network and listing fees.</li>" +
                       "</ul>");
 
 
