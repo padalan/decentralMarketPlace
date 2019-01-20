@@ -22,7 +22,7 @@ $ sudo apt install git nodejs npm
 $ npm install -g --save truffle ganache-cli
 
 ```
-If you get any permission errors such as below for truffle and ganache-cli, run the below commands. [source](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
+If you get any permission errors regarding truffle and ganache-cli, run the below commands. [source](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
 
 ```
 $ mkdir ~/.npm-global
