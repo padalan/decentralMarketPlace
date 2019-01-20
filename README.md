@@ -9,26 +9,62 @@ More features to come.
 ## Getting Started
 
 ### Installing
+
+
 Install IPFS, NodeJS and associated packages:
 Download go-ipfs from https://dist.ipfs.io/#go-ipfs for your platform.
 ```
 $ tar xvfz go-ipfs.tar.gz
 $ cd go-ipfs
 $ ./install.sh
-sudo apt install nodejs npm
-npm install --save solc mocha ganache-cli web3@1.0.0-beta.26 truffle-hdwallet-provider@0.0.3
+$ cd ../
+$ sudo apt install git nodejs npm
+$ npm install -g --save truffle ganache-cli
 
 ```
+If you get any permission errors such as below for truffle and ganache-cli, run the below commands. [source](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
+
+```
+$ mkdir ~/.npm-global
+$ npm config set prefix '~/.npm-global'
+$ export PATH=~/.npm-global/bin:$PATH
+$ source ~/.profile
+$ npm install -g --save truffle ganache-cli
+
+```
+Optional, but suggested: If you are running bash, run the below: (Do the required for your shell)
+```
+$ cp ~/.bashrc ~/.bashrc_orig
+$ echo -e "\n\n# Add npm global path\nexport PATH=~/.npm-global/bin:$PATH" >> ~/.bashrc
+```
+
+Clone the git repository:
+```
+$ git clone https://github.com/padalan/decentralMarketPlace.git
+$
+$ cd decentralMarketPlace
+```
+Install required node modules: (make sure you are in decentralmarketPlace directory)
+```
+$ npm install
+```
+
 Install Metamask for the browser and connect to the appropriate Blockchain with valid accounts with ether in them.
 
-## Starting the daemons
+# Configuration and Daemons
 
-Run ipfs, ganache-cli, webpack, node-console(optional)
+Configure IPFS and start the IPFS daemon
 ```
-$ ipfs-daemon (make sure the daemon is running successfully, usually on port 8080)
+$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods "[\"PUT\", \"POST\", \"GET\"]"
+$ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'
+$ ipfs-daemon (make sure the daemon is running successfully on port 8080)
+```
+
+Run ganache-cli, node-console(optional)
+```
 $ ganache-cli -q (new terminal)
-$ cd $PROJECT_DIR/ (new terminal)
-$ npm run dev (Compilation might fail until you deploy the contracts to Blockchain. But that's OK.)
+$ cd to $PROJECT_DIRECTORY (new terminal)
 $ truffle console (new terminal)
 ```
 
@@ -50,7 +86,14 @@ truffle(development)> migrate --reset
 > Total deployments:   4
 > Final cost:          0.03266108 ETH
 ```
-## Running the tests
+
+Run the webserver
+```
+$ npm run dev (Compilation will fail until you deploy the contracts to Blockchain)
+```
+The web server could be running on localhost:8081
+
+## Run the tests
 We use mocha, a JavaScript framework to test.
 
 Run below command to test
