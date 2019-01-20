@@ -41,7 +41,6 @@ $ echo -e "\n\n# Add npm global path\nexport PATH=~/.npm-global/bin:$PATH" >> ~/
 Clone the git repository:
 ```
 $ git clone https://github.com/padalan/decentralMarketPlace.git
-$
 $ cd decentralMarketPlace
 ```
 Install required node modules: (make sure you are in decentralmarketPlace directory)
@@ -58,7 +57,7 @@ Configure IPFS and start the IPFS daemon
 $ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
 $ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods "[\"PUT\", \"POST\", \"GET\"]"
 $ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'
-$ ipfs-daemon (make sure the daemon is running successfully on port 8080)
+$ ipfs daemon (make sure the daemon is running successfully on port 8080)
 ```
 
 Run ganache-cli, node-console(optional)
