@@ -1,0 +1,11 @@
+
+truffle deployed
+truffle console
+migrate --reset
+
+EcommerceStore.deployed().then( function(f) { f.addProduct("Note 8", "Phones", web3.utils.toWei('1.3', 'ether'), 0, "DescLink", "ImgLink") });
+EcommerceStore.deployed().then( function(f) { f.addProduct("Iphone X", "Phones", web3.utils.toWei('1.2', 'ether'), 0, "DescLink", "ImgLink") });
+EcommerceStore.deployed().then( function(f) { f.addProduct("Oranges", "Fruits", web3.utils.toWei('0.3', 'ether'), 0, "DescLink", "ImgLink") });
+EcommerceStore.deployed().then( function(f) { f.addProduct("Nik Gough", "Art", web3.utils.toWei('56.3', 'ether'), 0, "DescLink", "ImgLink") });
+
+EcommerceStore.deployed().then( function(f) { f.getProduct(3).then(function(f) {console.log(f)}) })
