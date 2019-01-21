@@ -1,5 +1,7 @@
 pragma solidity ^0.5.0;
 
+import "contracts/Escrow.sol";
+
 // Create Contract
 contract EcommerceStore {
 
@@ -9,6 +11,7 @@ contract EcommerceStore {
     //Declare ProductIndex we will be using to identify products
     uint public ProductIndex;
 
+    address public arbiter;
     // Product structure.
     struct Product {
         uint id;
@@ -21,9 +24,10 @@ contract EcommerceStore {
         string imgLink;
     }
 
-    constructor() public {
+    constructor(address _arbiter) public {
         // Initialize ProductIndex to zero.
         ProductIndex = 0;
+        arbiter = _arbiter;
     }
 
     // For each seller we can lookup the product by their address and Id using sotres Hashmap
@@ -32,10 +36,13 @@ contract EcommerceStore {
 
     // Given a product id, we ca find the owner using ProductIdinStore hashmap
     // address = productIdinStore[id]
-    mapping(uint => address) productIdinStore;
+    mapping(uint => address payable) productIdinStore;
 
     // We can find the product with only id from the above two hashmaps
     // product = stores[productIdinStore[id]][id] -- used in buy function.
+
+    // For each product what is the address of the Escrow
+    mapping(uint => address) productEscrow;
 
     //Add product to the blockchain
     function addProduct( string memory _name, string memory _category, uint _price, uint _condition, string memory _descLink, string memory _imgLink) public {
@@ -61,6 +68,20 @@ contract EcommerceStore {
       require(msg.value >= product.price);
       product.buyer = msg.sender;
       stores[productIdinStore[_id]][_id] = product;
+      Escrow escrow = (new Escrow).value(msg.value)(_id, msg.sender, productIdinStore[_id], arbiter);
+      productEscrow[_id] = address(escrow);
+    }
+
+    function escrowInfo(uint _id) view public returns (address, address, address, bool, uint, uint) {
+      return Escrow(productEscrow[_id]).escrowInfo();
+    }
+
+    function releaseAmountToSeller(uint _id) public {
+      Escrow(productEscrow[_id]).releaseAmountToSeller(msg.sender);
+    }
+
+    function refundAmountToBuyer(uint _id) public {
+      Escrow(productEscrow[_id]).refundAmountToBuyer(msg.sender);
     }
 
 }

@@ -34,7 +34,7 @@ window.App = {
                           "<li>Verify and Pay the Network and listing fees.</li>" +
                       "</ul>");
 
-
+  $("#current-account").html("Current Account: " + web3.eth.accounts[0]);
   // Check whether we are on the product page. #product-details is found?
   if($("#product-details").length > 0) {
     let productId = new URLSearchParams(window.location.search).get('id');
@@ -77,13 +77,41 @@ window.App = {
       var sendAmount = $("#buy-now-price").val();
       var productId = $("#product-id").val();
       EcommerceStore.deployed().then(function(i){
-        i.buy(productId, {value: sendAmount, from: web3.eth.accounts[0] , gas: 444000}).then( function(f){
+        i.buy(productId, {value: sendAmount, from: web3.eth.accounts[0] , gas: 4444000}).then( function(f){
           $("#msg").show();
           $("#msg").html("You purchased the item Successfully!");
           })
         });
         event.preventDefault();
       });
+
+    $("#release-funds").click(function(event){
+      let productId = new URLSearchParams(window.location.search).get('id');
+      EcommerceStore.deployed().then(function(f) {
+        $("#msg").html("Your transaction has been submitted. Please wait for conformation on the Blockchain").show();
+        console.log(productId);
+        f.releaseAmountToSeller(productId, {from: web3.eth.accounts[0]}).then(function(f) {
+          console.log(f);
+          location.reload();
+        }).catch(function(e) {
+            console.log(e);
+        })
+      });
+    });
+
+    $("#refund-funds").click(function(event){
+      let productId = new URLSearchParams(window.location.search).get('id');
+      EcommerceStore.deployed().then(function(f) {
+        $("#msg").html("Your transaction has been submitted. Please wait for conformation on the Blockchain").show();
+        console.log(productId);
+        f.refundAmountToBuyer(productId, {from: web3.eth.accounts[0]}).then(function(f) {
+          console.log(f);
+          location.reload();
+        }).catch(function(e) {
+            console.log(e);
+        })
+      });
+    });
     }
   };
 
@@ -99,6 +127,20 @@ window.App = {
         })
         $("#product-id").val(p[0]);
         $("#buy-now-price").val(p[3]);
+        // Hide escrow information if product is not purchased yet.
+        if(p[5] == '0x0000000000000000000000000000000000000000') {
+          $('#escrow-info').hide();
+        } else {
+          $('#buy-now').hide();
+          f.escrowInfo.call(productId).then(function(i) {
+            $("#current-details").html("<h4>Transactional details (updated):</h4>")
+            $("#buyer").html("Buyer: "+i[0]);
+            $("#seller").html("Seller: "+i[1]);
+            $("#arbiter").html("Arbiter: "+i[2]);
+            $("#release-count").html(i[4].toNumber());
+            $("#refund-count").html(i[5].toNumber());
+          });
+        }
       });
     })
   }
