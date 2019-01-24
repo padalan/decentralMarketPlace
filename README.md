@@ -77,6 +77,8 @@ $ tar xvfz go-ipfs.tar.gz
 $ cd go-ipfs
 $ ./install.sh
 $ cd ../
+$ sudo apt-get update
+$ sudo apt-get -y upgrade
 $ sudo apt install git nodejs npm
 $ npm install -g --save truffle ganache-cli
 
@@ -95,6 +97,15 @@ Optional, but suggested: If you are running bash, run the below: (Do the require
 ```
 $ cp ~/.bashrc ~/.bashrc_orig
 $ echo -e "\n\n# Add npm global path\nexport PATH=~/.npm-global/bin:$PATH" >> ~/.bashrc
+```
+
+Install Vyper: (On ubuntu 16.10)
+Please refer https://vyper.readthedocs.io/en/latest/installing-vyper.html
+```
+ssudo apt-get install python3.6 python3-dev
+sudo apt install virtualenv
+virtualenv -p python3.6 --no-site-packages ~/vyper-venv
+source ~/vyper-venv/bin/activate
 ```
 
 Clone the git repository:
@@ -129,6 +140,7 @@ $ truffle console (new terminal)
 ## Compilation
 
 Configure truffle.js to make sure you connect to the Blockchain network.
+You must be in vyper virtual environment to compile vyper Smart Contracts
 To compile, in truffle console run:
 ```
 $ truffle compile
