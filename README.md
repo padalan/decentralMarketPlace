@@ -1,8 +1,8 @@
-# Decentralized Ecommerce Store Smart Contract
+# Decentralized Ecommerce Store Smart Contract with Escrow service.
 
-Online decentralized market place on Blockchain. Cryptocurrency (Ether) as mode of payment.
+Online decentralized market place on Blockchain. Provides Escrow service. Cryptocurrency (Ether) as mode of payment.
 
-Shop owners can list their products by paying network fee only while staying anonymous. Customers can buy the product while staying anonymous. Escrow service is enabled. UI images and Description is served from IPFS.
+Shop owners can list their products by paying network fee only while staying anonymous. Customers can buy the product while staying anonymous. Escrow service is enabled. UI images and Description is served from IPFS. Security as priority.
 
 More features to come.
 
