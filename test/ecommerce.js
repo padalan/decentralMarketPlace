@@ -99,7 +99,7 @@ contract('EcommerceStore', function(accounts) {
 
              await ecommercestore.buy(2, { value: web3.utils.toWei(priceEth.toString()), from: buyer } )
              const finalBalanceOfBuyer = await web3.eth.getBalance(buyer)
-             assert.ok(finalBalanceOfBuyer < initialBalanceOfBuyer, ); // hard to be exact due to the gas usage
+             assert.ok(parseInt(finalBalanceOfBuyer) < parseInt(initialBalanceOfBuyer), "Amount is not deducted" ); // hard to be exact due to the gas usage
 
              /*
              const gasUsed = await receipt.receipt.gasUsed;
@@ -149,13 +149,16 @@ contract('EcommerceStore', function(accounts) {
              const initialBalanceOfSeller = await web3.eth.getBalance(seller);
 
              await ecommercestore.buy(4, { value: web3.utils.toWei(priceEth.toString()), from: buyer } )
-             await ecommercestore.releaseAmountToSeller(4, {from: buyer}) // Buyer is happy
              await ecommercestore.releaseAmountToSeller(4, {from: seller}) // Seller expects his money from Escrow
+             await ecommercestore.releaseAmountToSeller(4, {from: buyer}) // Buyer is happy
              const finalBalanceOfSeller = await web3.eth.getBalance(seller);
-             await assert.ok(finalBalanceOfSeller > initialBalanceOfSeller, ); // hard to be exact due to the gas usage
+             console.log(finalBalanceOfSeller, initialBalanceOfSeller);
+             await assert.ok(parseInt(finalBalanceOfSeller) > parseInt(initialBalanceOfSeller), "Amount was not released" ); // hard to be exact due to the gas usage
 
 
              /*
+             // Below logic should work, but I noticed inconsistencies in the test results.
+
              const receipt1 = await ecommercestore.addProduct( productName, category, price, condition, description , image, { from: seller })
              const gasUsed1 = await receipt1.receipt.gasUsed;
              const tx1 = await web3.eth.getTransaction(receipt1.tx);
@@ -192,7 +195,7 @@ contract('EcommerceStore', function(accounts) {
               await ecommercestore.refundAmountToBuyer(5, {from: seller}) // Seller wishes to refund
               const finalBalanceOfBuyer = await web3.eth.getBalance(buyer);
               // console.log(finalBalanceOfBuyer, initialBalanceOfBuyer)
-              await assert.ok(finalBalanceOfBuyer > initialBalanceOfBuyer, "Balances are not right!"); // hard to be exact due to the gas usage
+              await assert.ok(parseInt(finalBalanceOfBuyer) > parseInt(initialBalanceOfBuyer), "Balances are not right!"); // hard to be exact due to the gas usage
          });
 
              it("Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.", async() => {
@@ -213,7 +216,7 @@ contract('EcommerceStore', function(accounts) {
               await ecommercestore.refundAmountToBuyer(6, {from: arbiter}) // Arbiter rules in the favour of buyer
               const finalBalanceOfBuyer = await web3.eth.getBalance(buyer);
               // console.log(finalBalanceOfBuyer, initialBalanceOfBuyer)
-              await assert.ok(finalBalanceOfBuyer > initialBalanceOfBuyer, "Balances are not right!"); // hard to be exact due to the gas usage
+              await assert.ok(parseInt(finalBalanceOfBuyer) > parseInt(initialBalanceOfBuyer), "Balances are not right!"); // hard to be exact due to the gas usage
          });
 
 
@@ -235,7 +238,7 @@ contract('EcommerceStore', function(accounts) {
                await ecommercestore.releaseAmountToSeller(7, {from: arbiter}) // Arbiter rules in the favour of seller
                const finalBalanceOfSeller = await web3.eth.getBalance(seller);
                // console.log(finalBalanceOfBuyer, initialBalanceOfBuyer)
-               await assert.ok(finalBalanceOfSeller > initialBalanceOfSeller, "Balances are not right!"); // hard to be exact due to the gas usage
+               await assert.ok(parseInt(finalBalanceOfSeller) > parseInt(initialBalanceOfSeller), "Balances are not right!"); // hard to be exact due to the gas usage
           });
 
  });
