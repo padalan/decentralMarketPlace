@@ -41,15 +41,15 @@ We use Metamask for signing the transactions.
 #### Tests
 Tests are written in JavaScript. Around 8 tests are written to test the below. Tests are explained with brief code comments.
 * Product tests
-      * Add and Get the product (2 tests)
-      * Buy the product
+     1. Add and Get the product (2 tests)
+     2. Buy the product
 * Escrow tests
-      * Amount is deducted from the buyer's balance after buying and before the escrow settlement
-      * Amount is not released to seller after the buyer purchased and before the escrow settlement
-      * Amount is released to seller after the buyer is Happy about the purchase
-      * Amount is refunded to buyer after the buyer is not happy and the seller wishes to refund the purchase
-      * Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.
-      * Dispute: Amount is refunded to Seller after Arbiter rules the dispute in favor of Seller.
+     3. Amount is deducted from the buyer's balance after buying and before the escrow settlement
+     4. Amount is not released to seller after the buyer purchased and before the escrow settlement
+     5. Amount is released to seller after the buyer is Happy about the purchase
+     6. Amount is refunded to buyer after the buyer is not happy and the seller wishes to refund the purchase
+     7. Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.
+     8. Dispute: Amount is refunded to Seller after Arbiter rules the dispute in favor of Seller.
 
 
 #### Circuit Breakers
