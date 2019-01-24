@@ -1,17 +1,19 @@
 pragma solidity ^0.5.0;
 
 contract Escrow {
-    // Escrow Contract:
-    // We use voting to determine who wins the escrow during a dispute
+    /**
+      Escrow Contract:
+      We use voting to determine who wins the escrow during a dispute
 
-    // If both buyer and seller agree with the transaction, they vote accordingly
-    // and the buyer can release the funds to seller and seller can refund the buyer without the
-    // involvement of an Arbiter.
+      If both buyer and seller agree with the transaction, they vote accordingly
+      and the buyer can release the funds to seller and seller can refund the buyer without the
+      involvement of an Arbiter.
 
-    // If the transaction is disputed, the Arbiter votes to release the funds to the
-    // seller or refund the funds to the buyer by voting.
+      If the transaction is disputed, the Arbiter votes to release the funds to the
+      seller or refund the funds to the buyer by voting.
 
-    // We use 2/3 voting to decide who wins the dispute.
+      We use 2/3 voting to decide who wins the dispute.
+    **/
 
     address payable public buyer;
     address payable public seller;
