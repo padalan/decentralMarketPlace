@@ -22,6 +22,7 @@ contract EcommerceStore {
         address buyer;
         string descLink;
         string imgLink;
+        address seller;
     }
 
     constructor(address _arbiter) public {
@@ -50,15 +51,15 @@ contract EcommerceStore {
         ProductIndex += 1;
 
         // Create the product structure
-        Product memory product = Product(ProductIndex, _name, _category, _price, ProductCondition(_condition), address(0), _descLink, _imgLink );
+        Product memory product = Product(ProductIndex, _name, _category, _price, ProductCondition(_condition), address(0), _descLink, _imgLink, msg.sender );
         stores[msg.sender][ProductIndex] = product;
         productIdinStore[ProductIndex] = msg.sender;
     }
 
     // Getter function which returns product details given a product id.
-    function getProduct(uint _id) public view returns(uint, string memory, string memory, uint, ProductCondition, address, string memory, string memory) {
+    function getProduct(uint _id) public view returns(uint, string memory, string memory, uint, ProductCondition, address, string memory, string memory, address) {
         Product memory product = stores[productIdinStore[_id]][_id];
-        return (product.id, product.name, product.category, product.price, product.condition, product.buyer, product.descLink, product.imgLink);
+        return (product.id, product.name, product.category, product.price, product.condition, product.buyer, product.descLink, product.imgLink, product.seller);
     }
 
     // Buy a product using product id.
