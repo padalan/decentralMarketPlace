@@ -1,14 +1,16 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.0; // Solidity Version 0.5.0
 
+// Inherit Escrow from another local contract
 import "contracts/Escrow.sol";
 
 // Create Contract
 contract EcommerceStore {
+    // Contract to list an Item and buy in a Marketplace.
 
-    // Create ennumerated type with two members for product considiton
+    // Create ennumerated type with two members for product condition
     enum ProductCondition { New, Old }
 
-    //Declare ProductIndex we will be using to identify products
+    // ProductIndex is used to identify products
     uint public ProductIndex;
 
     address public arbiter;
@@ -20,8 +22,8 @@ contract EcommerceStore {
         uint price;
         ProductCondition condition;
         address buyer;
-        string descLink;
-        string imgLink;
+        string descLink; // Hash of Description uploaded to IPFS
+        string imgLink;  // Hash of Image uploaded to IPFS.
         address seller;
     }
 
@@ -31,11 +33,11 @@ contract EcommerceStore {
         arbiter = _arbiter;
     }
 
-    // For each seller we can lookup the product by their address and Id using sotres Hashmap
-    //product = stores[address][id]
+    // For each seller we can lookup the product by their address and Id using stores Hashmap
+    // product = stores[address][id]
     mapping(address => mapping(uint => Product)) stores;
 
-    // Given a product id, we ca find the owner using ProductIdinStore hashmap
+    // Given a product id, we can find the owner using ProductIdinStore hashmap
     // address = productIdinStore[id]
     mapping(uint => address payable) productIdinStore;
 
@@ -45,7 +47,7 @@ contract EcommerceStore {
     // For each product what is the address of the Escrow
     mapping(uint => address) productEscrow;
 
-    //Add product to the blockchain
+    // Add product to the blockchain
     function addProduct( string memory _name, string memory _category, uint _price, uint _condition, string memory _descLink, string memory _imgLink) public {
         // Increment the productIndex for every product. This variable is stored as id in the product structure
         ProductIndex += 1;
@@ -56,6 +58,7 @@ contract EcommerceStore {
         productIdinStore[ProductIndex] = msg.sender;
     }
 
+
     // Getter function which returns product details given a product id.
     function getProduct(uint _id) public view returns(uint, string memory, string memory, uint, ProductCondition, address, string memory, string memory, address) {
         Product memory product = stores[productIdinStore[_id]][_id];
@@ -65,8 +68,10 @@ contract EcommerceStore {
     // Buy a product using product id.
     function buy(uint _id) payable public {
       Product memory product = stores[productIdinStore[_id]][_id];
-      require(product.buyer == address(0));
       require(msg.value >= product.price);
+      // We assigned 0x0000...000 (zero-account) as buyer value to state the
+      // product is not already purchased
+      require(product.buyer == address(0));
       product.buyer = msg.sender;
       stores[productIdinStore[_id]][_id] = product;
       Escrow escrow = (new Escrow).value(msg.value)(_id, msg.sender, productIdinStore[_id], arbiter);
