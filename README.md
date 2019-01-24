@@ -102,10 +102,10 @@ $ echo -e "\n\n# Add npm global path\nexport PATH=~/.npm-global/bin:$PATH" >> ~/
 Install Vyper: (On ubuntu 16.10)
 Please refer https://vyper.readthedocs.io/en/latest/installing-vyper.html
 ```
-ssudo apt-get install python3.6 python3-dev
-sudo apt install virtualenv
-virtualenv -p python3.6 --no-site-packages ~/vyper-venv
-source ~/vyper-venv/bin/activate
+$ sudo apt-get install python3.6 python3-dev
+$ sudo apt install virtualenv
+$ virtualenv -p python3.6 --no-site-packages ~/vyper-venv
+$ source ~/vyper-venv/bin/activate
 ```
 
 Clone the git repository:
