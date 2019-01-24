@@ -5,6 +5,16 @@ Online decentralized market place on Blockchain. Provides Escrow service. Crypto
 ### Description
 Shop owners can list their products by paying network fee only while staying anonymous. Customers can buy the product while staying anonymous. Escrow service is enabled. UI images and Description is served from IPFS. Security as priority.
 
+##### Escrow Contract
+We use voting to determine who wins the escrow during an event of  dispute.
+
+If both buyer and seller agree with the transaction, they vote accordingly
+and the buyer can release the funds to seller or seller can refund the buyer without the
+involvement of an Arbiter.
+
+If the transaction is disputed, the Arbiter votes to release the funds to the seller or refund the funds to the buyer by voting.
+We use 2/3 voting to decide who wins the dispute.
+
 More features to come.
 
 ### About The Project
@@ -31,15 +41,15 @@ We use Metamask for signing the transactions.
 #### Tests
 Tests are written in JavaScript. Around 8 tests are written to test the below. Tests are explained with brief code comments.
 * Product tests
-      ✓ Add and Get the product (2 tests)
-      ✓ Buy the product
+      ** Add and Get the product (2 tests)
+      ** Buy the product
 * Escrow tests
-      ✓ Amount is deducted from the buyer's balance after buying and before the escrow settlement
-      ✓ Amount is not released to seller after the buyer purchased and before the escrow settlement
-      ✓ Amount is released to seller after the buyer is Happy about the purchase
-      ✓ Amount is refunded to buyer after the buyer is not happy and the seller wishes to refund the purchase
-      ✓ Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.
-      ✓ Dispute: Amount is refunded to Seller after Arbiter rules the dispute in favor of Seller.
+      ** Amount is deducted from the buyer's balance after buying and before the escrow settlement
+      ** Amount is not released to seller after the buyer purchased and before the escrow settlement
+      ** Amount is released to seller after the buyer is Happy about the purchase
+      ** Amount is refunded to buyer after the buyer is not happy and the seller wishes to refund the purchase
+      ** Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.
+      ** Dispute: Amount is refunded to Seller after Arbiter rules the dispute in favor of Seller.
 
 
 #### Circuit Breakers
@@ -117,12 +127,15 @@ $ truffle console (new terminal)
 ```
 
 ## Compilation
+
 Configure truffle.js to make sure you connect to the Blockchain network.
 To compile, in truffle console run:
 ```
 $ truffle compile
 ```
-Deploy
+### Deployment
+
+Deploy to respective network. Edit truffle.js if needed.
 ```
 truffle deploy
 ```
@@ -148,11 +161,6 @@ Run below command to test
 truffle test
 ```
 
-## Deployment
-Edit the seed mnemonics and run
-```
-node deploy.js
-```
 
 ## Built with
 * [Solidity](https://solidity.readthedocs.io/en/v0.4.0/) - The Contract oriented language
@@ -162,3 +170,4 @@ node deploy.js
 * [Web3](https://github.com/ethereum/wiki/wiki/JavaScript-API) - JavaScript app API
 * [Infura](https://infura.io/) - An IPFS and Ethereum infrastructure cluster.
 * [Metamask](https://metamask.io/) - Allows you to run Ethereum dApps in your browser.
+* [IPFS](https://ipfs.io/) - IPFS makes it possible to distribute high volumes of data with high efficiency  
