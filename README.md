@@ -44,12 +44,12 @@ Tests are written in JavaScript. Around 8 tests are written to test the below. T
      1. Add and Get the product (2 tests)
      2. Buy the product
 * Escrow tests
-     3. Amount is deducted from the buyer's balance after buying and before the escrow settlement
-     4. Amount is not released to seller after the buyer purchased and before the escrow settlement
-     5. Amount is released to seller after the buyer is Happy about the purchase
-     6. Amount is refunded to buyer after the buyer is not happy and the seller wishes to refund the purchase
-     7. Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.
-     8. Dispute: Amount is refunded to Seller after Arbiter rules the dispute in favor of Seller.
+     1. Amount is deducted from the buyer's balance after buying and before the escrow settlement
+     2. Amount is not released to seller after the buyer purchased and before the escrow settlement
+     3. Amount is released to seller after the buyer is Happy about the purchase
+     4. Amount is refunded to buyer after the buyer is not happy and the seller wishes to refund the purchase
+     5. Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.
+     6. Dispute: Amount is refunded to Seller after Arbiter rules the dispute in favor of Seller.
 
 
 #### Circuit Breakers
