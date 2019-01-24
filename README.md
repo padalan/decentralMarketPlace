@@ -1,10 +1,59 @@
 # Decentralized Ecommerce Store Smart Contract with Escrow service.
 
-Online decentralized market place on Blockchain. Provides Escrow service. Cryptocurrency (Ether) as mode of payment.
+Online decentralized market place on Blockchain. Provides Escrow service. Cryptocurrency (Ether) as a mode of payment.
 
+### Description
 Shop owners can list their products by paying network fee only while staying anonymous. Customers can buy the product while staying anonymous. Escrow service is enabled. UI images and Description is served from IPFS. Security as priority.
 
 More features to come.
+
+### About The Project
+The project is a Truffle project that allows you to easily compile, migrate and test.
+
+#### About Comments
+Since the code is written for educational purpose, I have extensively commented both the Smart Contracts and the JavaScript code.
+
+#### Inheritance from another contracts
+Inherited Escrow Smart contract written independently to EcommerceStore contract.
+
+#### Running the app and accessing the UI
+
+App can be deployed in two ways:
+* Locally (dev server)
+* Rinkeby network (find the details in deployed_addresses.txt)
+
+You can run the app on a dev server locally and access the UI.
+See "Run the app" section.
+
+#### Authentication and Signing the contracts
+We use Metamask for signing the transactions.
+
+#### Tests
+Tests are written in JavaScript. Around 8 tests are written to test the below. Tests are explained with brief code comments.
+* Product tests
+      ✓ Add and Get the product (2 tests)
+      ✓ Buy the product
+* Escrow tests
+      ✓ Amount is deducted from the buyer's balance after buying and before the escrow settlement
+      ✓ Amount is not released to seller after the buyer purchased and before the escrow settlement
+      ✓ Amount is released to seller after the buyer is Happy about the purchase
+      ✓ Amount is refunded to buyer after the buyer is not happy and the seller wishes to refund the purchase
+      ✓ Dispute: Amount is refunded to buyer after Arbiter rules the dispute in favor of buyer.
+      ✓ Dispute: Amount is refunded to Seller after Arbiter rules the dispute in favor of Seller.
+
+
+#### Circuit Breakers
+Implemented two circuit breakers to validate the Escrow
+
+#### Design patterns
+Read about Design patterns' design decisions and implementation in design_pattern_desicions.md file.
+
+#### Security
+Security is the most important aspect of a Smart Contract. Read about the measures taken and examples of attackes in avoiding_common_attacks.md file.
+
+#### IPFS
+Since storing the data on the Ethereum Blockchain is expensive, I used IPFS to store Images and Description of products.
+
 
 ## Getting Started
 
@@ -71,18 +120,17 @@ $ truffle console (new terminal)
 Configure truffle.js to make sure you connect to the Blockchain network.
 To compile, in truffle console run:
 ```
-truffle(development)> compile
-truffle(development)> migrate
+$ truffle compile
 ```
-Alternatively, to compile and deploy you can run:
+Deploy
 ```
-truffle(development)> migrate --reset
+truffle deploy
 ```
  Make sure you see the summary. Should look something like:
  ```
  Summary
 =======
-> Total deployments:   4
+> Total deployments:   2
 > Final cost:          0.03266108 ETH
 ```
 
@@ -93,11 +141,11 @@ $ npm run dev (Compilation will fail until you deploy the contracts to Blockchai
 The web server could be running on localhost:8081
 
 ## Run the tests
-We use mocha, a JavaScript framework to test.
+We use Truffle to test.
 
 Run below command to test
 ```
-npm run test
+truffle test
 ```
 
 ## Deployment
