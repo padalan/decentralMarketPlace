@@ -12,7 +12,7 @@ contract Escrow {
       If the transaction is disputed, the Arbiter votes to release the funds to the
       seller or refund the funds to the buyer by voting.
 
-      We use 2/3 voting to decide who wins the dispute.
+      The contract uses 2/3 voting to decide who wins the dispute.
     **/
 
     address payable public buyer;
