@@ -108,6 +108,23 @@ $ virtualenv -p python3.6 --no-site-packages ~/vyper-venv
 $ source ~/vyper-venv/bin/activate
 ```
 
+Install Ethereum-Bridge
+
+```
+npm install -g ethereum-bridge
+```
+Run the ethereum-bridge using web3.eth.accounts[8]
+```
+ethereum-bridge -H localhost:8545 -a 8
+```
+
+Get the Oraclize Address Resolver (OAR) from the console and replace it with the OAR in GetETHUSD.sol file.
+```
+Please add this line to your contract constructor:
+OAR = OraclizeAddrResolverI(0x14D72081EaFb56E80341108ff8045b8fBd250471);
+```
+
+#### Clone decentralMarketPlace
 Clone the git repository:
 ```
 $ git clone https://github.com/padalan/decentralMarketPlace.git
