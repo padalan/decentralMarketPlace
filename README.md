@@ -64,6 +64,11 @@ Security is the most important aspect of a Smart Contract. Read about the measur
 #### IPFS
 Since storing the data on the Ethereum Blockchain is expensive, I used IPFS to store Images and Description of products.
 
+#### Oracle service
+Used oracalize to get get gas and price information.
+
+#### Vyper contracts
+Implemented two vyper contracts as a requirement for this course. Will integrate the functionality in the future.
 
 ## Getting Started
 
@@ -166,14 +171,17 @@ $ truffle compile
 
 Deploy to respective network. Edit truffle.js if needed.
 ```
-truffle deploy
+$ truffle migrate --compile-all --reset
+
 ```
  Make sure you see the summary. Should look something like:
  ```
+
  Summary
-=======
-> Total deployments:   2
-> Final cost:          0.03266108 ETH
+ =======
+ > Total deployments:   5
+ > Final cost:          15.11725086 ETH // The high gas is due to Oraclize service.
+
 ```
 
 Run the webserver
