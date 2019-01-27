@@ -1,9 +1,7 @@
 // Allows us to use ES6 in our migrations and tests.
 require('babel-register')
 require('babel-polyfill')
-var HDWalletProvider = require("truffle-hdwallet-provider");
-var mnemonic = "eye warrior stumble resource ride athlete gather food end rug remind tide";
-
+// var HDWalletProvider = require("truffle-hdwallet-provider");
 
 module.exports = {
   networks: {

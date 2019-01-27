@@ -27,10 +27,13 @@ contract EcommerceStore {
         address seller;
     }
 
+    event LogCurrentAccount(address currentAccount);
+
     constructor(address _arbiter) public {
         // Initialize ProductIndex to zero.
         ProductIndex = 0;
         arbiter = _arbiter;
+        emit LogCurrentAccount(msg.sender);
     }
 
     // For each seller we can lookup the product by their address and Id using stores Hashmap
@@ -56,6 +59,7 @@ contract EcommerceStore {
         Product memory product = Product(ProductIndex, _name, _category, _price, ProductCondition(_condition), address(0), _descLink, _imgLink, msg.sender );
         stores[msg.sender][ProductIndex] = product;
         productIdinStore[ProductIndex] = msg.sender;
+        emit LogCurrentAccount(msg.sender);
     }
 
 
@@ -76,6 +80,7 @@ contract EcommerceStore {
       stores[productIdinStore[_id]][_id] = product;
       Escrow escrow = (new Escrow).value(msg.value)(_id, msg.sender, productIdinStore[_id], arbiter);
       productEscrow[_id] = address(escrow);
+      emit LogCurrentAccount(msg.sender);
     }
 
     function escrowInfo(uint _id) view public returns (address, address, address, bool, uint, uint) {

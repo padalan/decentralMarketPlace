@@ -1,15 +1,19 @@
 pragma solidity ^0.5.0;
+// Implemented this contract to meet the requirements of the project.
+// oracalize and EthPM
+// installed Oracalize using EthPM
+// The contract is very simple and self explanatory
 
-
-// Renamed https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol to
+// However, renamed https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol to
 // installed_contracts/oraclize-api/contracts/usingOraclize.sol
 import "installed_contracts/oraclize-api/contracts/usingOraclize.sol";
 
 contract GetETHUSD is usingOraclize {
 
-    string public ETHgas;
-    string public ETHprice;
+    string public ETHgas; // Ether gas price
+    string public ETHprice; // Ether price in USD
 
+    // Events
     event LogInfo(string description);
     event LogPrice(string price);
     event LogGas(string price);

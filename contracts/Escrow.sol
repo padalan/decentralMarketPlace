@@ -20,10 +20,17 @@ contract Escrow {
     address public arbiter;
     uint public productId;
     uint public amount;
+
+    // Check whether the caller signed the releaseAmount transaction
     mapping(address => bool) releaseAmount;
+    // Check whether the caller signed the refundAmount transaction
     mapping(address => bool) refundAmount;
+
+    // Voting metrics
     uint public releaseCount;
     uint public refundCount;
+
+    // Check whether the funds are Disbursed
     bool public fundsDisbursed;
     address public owner;
 
@@ -37,6 +44,7 @@ contract Escrow {
         owner = msg.sender;
     }
 
+    // Modifier to check whether funds are already not Disbursed.
     modifier fundsNotDisbursed() {
       require(fundsDisbursed == false);
       _;
@@ -57,7 +65,7 @@ contract Escrow {
 
         if (releaseCount >= 2) {
           // >= : If parties vote at the same time and transactions get processed
-          // in the same block
+          // in the same block. 
             seller.transfer(amount);
             fundsDisbursed = true;
         }
