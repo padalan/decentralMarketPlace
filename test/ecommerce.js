@@ -152,7 +152,6 @@ contract('EcommerceStore', function(accounts) {
              await ecommercestore.releaseAmountToSeller(4, {from: seller}) // Seller expects his money from Escrow
              await ecommercestore.releaseAmountToSeller(4, {from: buyer}) // Buyer is happy
              const finalBalanceOfSeller = await web3.eth.getBalance(seller);
-             console.log(finalBalanceOfSeller, initialBalanceOfSeller);
              await assert.ok(parseInt(finalBalanceOfSeller) > parseInt(initialBalanceOfSeller), "Amount was not released" ); // hard to be exact due to the gas usage
 
 

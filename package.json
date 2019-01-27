@@ -45,5 +45,8 @@
     "babel-polyfill": "6.26.0",
     "mocha": "5.2.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "web3": "^0.20.7"
+  }
 }
