@@ -3,7 +3,7 @@
 Online decentralized market place on Blockchain. Provides Escrow service. Cryptocurrency (Ether) as a mode of payment.
 
 ### Description
-Shop owners can list their products by paying network fee only while staying anonymous. Customers can buy the product while staying anonymous. Escrow service is enabled. UI images and Description is served from IPFS. Security as priority.
+Shop owners can list their products by paying only network fee while staying anonymous. Customers can buy the product while staying anonymous. Escrow service is enabled. UI images and Description are served from IPFS.
 
 ##### Escrow Contract
 We use voting to determine who wins the escrow during an event of  dispute.
@@ -15,25 +15,23 @@ involvement of an Arbiter.
 If the transaction is disputed, the Arbiter votes to release the funds to the seller or refund the funds to the buyer by voting.
 We use 2/3 voting to decide who wins the dispute.
 
-More features to come.
-
 ### About The Project
-The project is a Truffle project that allows you to easily compile, migrate and test.
+The project is a Truffle project that allows us to easily compile, migrate and test.
 
 #### About Comments
 Since the code is written for educational purpose, I have extensively commented both the Smart Contracts and the JavaScript code.
 
 #### Inheritance from another contracts
-Inherited Escrow Smart contract written independently to EcommerceStore contract.
+Inherited Escrow Smart contract to EcommerceStore contract.
+Installed Oracalize using EthPM and imported it to another contract.
 
 #### Running the app and accessing the UI
 
-App can be deployed in two ways:
-* Locally (dev server)
-* Rinkeby network (find the details in deployed_addresses.txt)
+App can be deployed locally.
+Smart contract is deployed on Rinkeby network (find the details in deployed_addresses.txt)
 
 You can run the app on a dev server locally and access the UI.
-See "Run the app" section.
+You can also access the UI while the contract is running on Rinkeby netowrk.
 
 #### Authentication and Signing the contracts
 We use Metamask for signing the transactions.
@@ -74,6 +72,7 @@ Implemented two vyper contracts as a requirement for this course. Will integrate
 
 ### Installing
 
+The installation has been tested on Ubuntu 18.04.1 LTS (Bionic Beaver)
 
 Install IPFS, NodeJS and associated packages:
 Download go-ipfs from https://dist.ipfs.io/#go-ipfs for your platform.
@@ -88,7 +87,7 @@ $ sudo apt install git nodejs npm
 $ npm install -g --save truffle ganache-cli
 
 ```
-If you get any permission errors regarding truffle and ganache-cli, run the below commands. [source](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
+Sugested: If you get any permission errors regarding truffle and ganache-cli, run the below commands. [source](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally).
 
 ```
 $ mkdir ~/.npm-global
@@ -111,22 +110,16 @@ $ sudo apt-get install python3.6 python3-dev
 $ sudo apt install virtualenv
 $ virtualenv -p python3.6 --no-site-packages ~/vyper-venv
 $ source ~/vyper-venv/bin/activate
+$ git clone https://github.com/ethereum/vyper.git
+$ cd vyper
+$ make
+$ make test
 ```
 
 Install Ethereum-Bridge
 
 ```
 npm install -g ethereum-bridge
-```
-Run the ethereum-bridge using web3.eth.accounts[8]
-```
-ethereum-bridge -H localhost:8545 -a 8
-```
-
-Get the Oraclize Address Resolver (OAR) from the console and replace it with the OAR in GetETHUSD.sol file.
-```
-Please add this line to your contract constructor:
-OAR = OraclizeAddrResolverI(0x14D72081EaFb56E80341108ff8045b8fBd250471);
 ```
 
 #### Clone decentralMarketPlace
@@ -135,7 +128,7 @@ Clone the git repository:
 $ git clone https://github.com/padalan/decentralMarketPlace.git
 $ cd decentralMarketPlace
 ```
-Install required node modules: (make sure you are in decentralmarketPlace directory)
+Install required node modules: (make sure you are in decentralmarketPlace directory. This might take a while)
 ```
 $ npm install
 ```
@@ -146,41 +139,73 @@ Install Metamask for the browser and connect to the appropriate Blockchain with 
 
 Configure IPFS and start the IPFS daemon
 ```
+$ ipfs init
 $ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
 $ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods "[\"PUT\", \"POST\", \"GET\"]"
 $ ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials '["true"]'
 $ ipfs daemon (make sure the daemon is running successfully on port 8080)
 ```
 
-Run ganache-cli, node-console(optional)
+Run ganache-cli
 ```
 $ ganache-cli -q (new terminal)
 $ cd to $PROJECT_DIRECTORY (new terminal)
-$ truffle console (new terminal)
+```
+Run the ethereum-bridge using web3.eth.accounts[8]
+```
+$ ethereum-bridge -H localhost:8545 -a 8
+```
+If you run into an error something like:
+```
+.npm-global/lib/node_modules/ethereum-bridge/node_modules/bitcore-mnemonic/node_modules/bitcore-lib/index.js:12
+    throw new Error(message);
+    Error: More than one instance of bitcore-lib found. Please make sure to require bitcore-lib and check that submodules do not also include their own bitcore-lib dependency.
+
+```
+Please do the following as suggested [here](https://github.com/bitpay/bitcore/issues/1454)
+
+```
+in the below file:
+~/.nvm/versions/node/v4.8.3/lib/node_modules/bitcore/node_modules/insight-api/node_modules/bitcore-lib/index.js
+line 7:
+bitcore.versionGuard = function(version) {
+Change it to:
+bitcore.versionGuard = function(version) { return;
+
+$ ethereum-bridge -H localhost:8545 -a 8
+```
+
+Get the Oraclize Address Resolver (OAR) from the console and replace it with the OAR in decentralMarketPlace/contracts/GetETHUSD.sol file.
+```
+Please add this line to your contract constructor in decentralMarketPlace/contracts/GetETHUSD.sol:
+OAR = OraclizeAddrResolverI(0x14D72081EaFb56E80341108ff8045b8fBd250471);
 ```
 
 ## Compilation
 
 Configure truffle.js to make sure you connect to the Blockchain network.
 You must be in vyper virtual environment to compile vyper Smart Contracts
-To compile, in truffle console run:
-```
-$ truffle compile
-```
+
+At this point you have three terminals open running the below:
+1. ipfs daemon
+2. ganache-cli
+3. ethereum-bridge
+
 ### Deployment
 
-Deploy to respective network. Edit truffle.js if needed.
+Deploy to respective network. Edit truffle.js if needed. Should be in decentralMarketPlace directory
 ```
+$ source ~/vyper-venv/bin/activate
 $ truffle migrate --compile-all --reset
 
 ```
- Make sure you see the summary. Should look something like:
- ```
+ 
+```
 
  Summary
  =======
  > Total deployments:   5
- > Final cost:          15.11725086 ETH // The high gas is due to Oraclize service.
+ > Final cost:          15.11725086 ETH // The high Cost is due to Oraclize service.
 
 ```
 
@@ -190,6 +215,9 @@ $ npm run dev (Compilation will fail until you deploy the contracts to Blockchai
 ```
 The web server could be running on localhost:8081
 
+In Chrome web browser go to http://localhost:8081
+(I tested only in Chrome. Firefox is unpreditable with my JavaScript)
+
 ## Run the tests
 We use Truffle to test.
 
@@ -197,7 +225,31 @@ Run below command to test
 ```
 truffle test
 ```
+## On the web UI
+Initialize MetaMask and make sure you are connected to the appropriate Blockchain network. Import accounts from ganache-cli is needed.
+If using rinkeby, see deployed_addresses.txt
 
+How to buy a product
+     Click on details of the product on the home page
+     Click 'Buy'.
+     Verify and accept the charges on Metamask pop-up.
+
+How To add a product listing
+     Go to List Item from the home page
+     Fill the form
+     Click on 'Add Product To Store'
+     Verify and Pay the Network and listing fees.
+     
+Escrow service:
+     After the product is purchased, click on details.
+     As a Seller, Buyer and Arbiter Click on 'Release Amount to Seller' or 'Refund Amount to Buyer'.
+     Check the escrow information.
+     We use voting to determine who wins the escrow during a dispute
+     
+     If both buyer and seller agree with the transaction, they vote accordingly and the buyer can release the funds to seller and seller can refund the buyer without the involvement of an Arbiter.
+     If the transaction is disputed, the Arbiter votes to release the funds to the seller or refund the funds to the buyer by voting.
+     The contract uses 2/3 voting to decide who wins the dispute.
+ 
 
 ## Built with
 * [Solidity](https://solidity.readthedocs.io/en/v0.4.0/) - The Contract oriented language
