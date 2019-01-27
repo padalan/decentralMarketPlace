@@ -5,15 +5,18 @@ var EcommerceStore = artifacts.require('EcommerceStore')
 
 /*
 This test are covering the operations that the ecommerceStore has to do regularly:
-  addProduct:
-  getProduct:
-  buy:
-  escrowInfo:
-  releaseAmountToSeller:
-  refundAmountToBuyer:
+  addProduct: Add a product
+  getProduct: Retrive the product based on Product id
+  buy: Buy the product based on the Id
+  escrowInfo: Display Escrow information
+  releaseAmountToSeller: Vote to release the amount to Seller
+  refundAmountToBuyer: Vote to refund the amount to Buyer
 
 The tests were written because these are important functions that are crucial to the smart contract functionality.
+
+I have used the names of the variables which are self explanatory
 */
+
 contract('EcommerceStore', function(accounts) {
     // Contract is deployed by accounts[0]
     const buyer = accounts[1]
@@ -31,17 +34,21 @@ contract('EcommerceStore', function(accounts) {
 
     describe('Product tests', () => {
 
-
     it("Add and Get the product (2 tests)", async() => {
       const ecommercestore = await EcommerceStore.deployed()
+
+      // product Details
       const productName = "A very nice book"
       const category = "Books"
       const price = web3.utils.toWei(".32".toString(), 'ether') // Replace 32.2 with desired price
       const condition = 1
       const description = "Description Link from IPFS"
       const image = "image Link from IPFS"
+
+      // Add the product
       await ecommercestore.addProduct( productName, category, price, condition, description , image, { from: seller })
 
+      // Retrive the product with id 1.
       const product = await ecommercestore.getProduct(1)
 
       // Assert if Name, category, buyer, description, image, and seller match
@@ -58,8 +65,14 @@ contract('EcommerceStore', function(accounts) {
     it("Buy the product", async() => {
       const ecommercestore = await EcommerceStore.deployed()
       const product_to_buy = await ecommercestore.getProduct(1)
+
+      // buy the product which was lister in the above test.
+      // Send Ether from buyer
+
+      // Product_tx is used to calculate the gas price of the transaction
       const product_tx = await ecommercestore.buy(1, { value: web3.utils.toWei(".32".toString()), from: buyer } )
 
+      // Retrive the product
       const product_bought = await ecommercestore.getProduct(1)
 
       // Assert if Name, category, price, condition, buyer, description, image, and seller match
@@ -73,8 +86,6 @@ contract('EcommerceStore', function(accounts) {
       assert.equal(product_to_buy[8], product_bought[8] , "seller do not match")
 
     })
-
-
 
   });
 
