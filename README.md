@@ -226,29 +226,29 @@ Run below command to test
 truffle test
 ```
 ## On the web UI
-Initialize MetaMask and make sure you are connected to the appropriate Blockchain network. Import accounts from ganache-cli is needed.
+Initialize MetaMask and make sure you are connected to the appropriate Blockchain network (localhost:8545 ). Import accounts from ganache-cli is needed. It could be any accounts on ganache-cli. Last account of ganache-cli is reserved to be Arbiter.
 If using rinkeby, see deployed_addresses.txt
 
-How to buy a product
-     Click on details of the product on the home page
-     Click 'Buy'.
-     Verify and accept the charges on Metamask pop-up.
+#### How to buy a product
+* Click on details of the product on the home page
+* Click 'Buy'.
+* Verify and accept the charges on Metamask pop-up.
 
-How To add a product listing
-     Go to List Item from the home page
-     Fill the form
-     Click on 'Add Product To Store'
-     Verify and Pay the Network and listing fees.
+#### How To add a product listing
+* Go to List Item from the home page
+* Fill the form
+* Click on 'Add Product To Store'
+* Verify and Pay the Network and listing fees.
      
-Escrow service:
-     After the product is purchased, click on details.
-     As a Seller, Buyer and Arbiter Click on 'Release Amount to Seller' or 'Refund Amount to Buyer'.
-     Check the escrow information.
-     We use voting to determine who wins the escrow during a dispute
+#### Escrow service:
+* After the product is purchased, click on details.
+* As a Seller, Buyer and Arbiter Click on 'Release Amount to Seller' or 'Refund Amount to Buyer'.
+* Check the escrow information.
+* We use voting to determine who wins the escrow during a dispute
      
-     If both buyer and seller agree with the transaction, they vote accordingly and the buyer can release the funds to seller and seller can refund the buyer without the involvement of an Arbiter.
-     If the transaction is disputed, the Arbiter votes to release the funds to the seller or refund the funds to the buyer by voting.
-     The contract uses 2/3 voting to decide who wins the dispute.
+If both buyer and seller agree with the transaction, they vote accordingly and the buyer can release the funds to seller and seller can refund the buyer without the involvement of an Arbiter. If the transaction is disputed, the Arbiter votes to release the funds to the seller or refund the funds to the buyer by voting. The contract uses 2/3 voting to decide who wins the dispute.
+
+There is a possibility of adding mulitple arbiters by implementing expandable array in the contract.
  
 
 ## Built with
