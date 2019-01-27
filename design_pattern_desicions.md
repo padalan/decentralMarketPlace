@@ -71,16 +71,7 @@ Mapping is used for security purposes, if someone want to loop over the mapping 
 
 ### Library
 Inherited Escrow contract by extending the contract.
-Created an ERC20 Token EcommerCoin (ECC5) using Zeppelin & EthPM.
-
-### Dynamic Array (upgradable pattern)
-
-A dynamic array is used to store the information about the user like name, lastname, email, phone...
-
-Dynamic because in the future is possible that the frontend developer want to allow the users to introduce more values, like: Services Providers associated with the Identity.
-
-### Lifetime (Mortal) - Only advanced users
-
+Installed Oraclize from Ethpm.
 
 ## Oraclize contract
 
@@ -90,3 +81,5 @@ Two querys to get offchain information:
 
 
 ## Other possible implementatios
+We could have a dynamic array to store multiple arbiters for this project.
+Extend the Product struct to hold more information such as auction information.
