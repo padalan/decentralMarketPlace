@@ -1,0 +1,22 @@
+Rinkeby Testnet:
+
+Contract address: 0xF6cce79F5142ff660f0Afbc3e9c2ef34D1Be1b5A
+https://rinkeby.etherscan.io/address/0xf6cce79f5142ff660f0afbc3e9c2ef34d1be1b5a
+
+---
+Arbiter Private and public keys:
+Priv: 0x65126686c696029d4da8bc84bdcc7aa39198b64492718264100200b14de89306
+public: 0x69873c206f169aa90e54df724a273693c9eac990
+
+Please note price is in wei.
+
+---
+We can also use UI on localhost to connect to Rinkeby network.
+
+---
+Known challenges with IPFS.
+
+You might have noticed in app.js that i used localhost as the gateway.
+We have to edit the code in app.js and that would complicate local deployment.
+In order to keep things simple, I wanted to make sure that the whole suite works
+flawlessly locally. Hence the description and images wouldn't load.

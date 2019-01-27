@@ -26,7 +26,7 @@ contract GetETHUSD is usingOraclize {
     constructor() public payable
     {
         // Replace the next line with what we see in the ethereum-bridge console
-        OAR = OraclizeAddrResolverI(0x14D72081EaFb56E80341108ff8045b8fBd250471);
+        OAR = OraclizeAddrResolverI(0x6f485C8BF6fc43eA212E93BBF8ce046C7f1cb475);
         getPriceDetails();
         getGasDetails();
     }

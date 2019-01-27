@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "babel-preset-env": "^1.7.0",
+    "truffle-hdwallet-provider": "^1.0.2",
     "web3": "^0.20.7"
   }
 }
