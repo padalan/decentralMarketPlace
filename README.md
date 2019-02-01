@@ -34,10 +34,10 @@ You can run the app on a dev server locally and access the UI.
 You can also access the UI while the contract is running on Rinkeby netowrk.
 
 #### Authentication and Signing the contracts
-We use Metamask for signing the transactions.
+Tested with Metamask for signing the transactions.
 
 #### Tests
-Tests are written in JavaScript. Around 8 tests are written to test the below. Tests are explained with brief code comments.
+Eight Tests are written in JavaScript. Tests are explained with brief code comments.
 * Product tests
      1. Add and Get the product (2 tests)
      2. Buy the product
@@ -51,7 +51,7 @@ Tests are written in JavaScript. Around 8 tests are written to test the below. T
 
 
 #### Circuit Breakers
-Implemented two circuit breakers to validate the Escrow
+Implemented two circuit breakers to validate the Escrow.
 
 #### Design patterns
 Read about Design patterns' design decisions and implementation in design_pattern_desicions.md file.
@@ -63,10 +63,10 @@ Security is the most important aspect of a Smart Contract. Read about the measur
 Since storing the data on the Ethereum Blockchain is expensive, I used IPFS to store Images and Description of products.
 
 #### Oracle service
-Used oracalize to get get gas and price information.
+Used oracalize to get gas and price information.
 
 #### Vyper contracts
-Implemented two vyper contracts as a requirement for this course. Will integrate the functionality in the future.
+Implemented two vyper contracts. Will integrate the functionality in the future.
 
 ## Getting Started
 
