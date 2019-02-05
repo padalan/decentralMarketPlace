@@ -5,6 +5,10 @@ Online decentralized market place on Blockchain. Provides Escrow service. Crypto
 ### Description
 Shop owners can list their products by paying only network fee while staying anonymous. Customers can buy the product while staying anonymous. Escrow service is enabled. UI images and Description are served from IPFS.
 
+##### Video Demonstration
+Please find the video [here](https://www.youtube.com/watch?v=eTeB9CoQ0C0) or by clicking the below image.
+[![Nikhil_Decentalized_marketPlace](https://img.youtube.com/vi/eTeB9CoQ0C0/0.jpg)](https://www.youtube.com/watch?v=eTeB9CoQ0C0)
+
 ##### Escrow Contract
 We use voting to determine who wins the escrow during an event of  dispute.
 
