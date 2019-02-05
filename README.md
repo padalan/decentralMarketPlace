@@ -7,7 +7,7 @@ Shop owners can list their products by paying only network fee while staying ano
 
 ##### Video Demonstration
 Please find the video [here](https://www.youtube.com/watch?v=eTeB9CoQ0C0) or by clicking the below image.
-## ---
+##### Watch it in 1080p for clear text
 [![Nikhil_Decentalized_marketPlace](https://img.youtube.com/vi/eTeB9CoQ0C0/0.jpg)](https://www.youtube.com/watch?v=eTeB9CoQ0C0)
 
 ##### Escrow Contract
